@@ -1,6 +1,6 @@
 import cv2
 from clustering import extract_object_centroids, find_optimal_k
-from spiral_fit import optimize_spiral
+from spiral_fit import optimize_spiral,optimize_spiral_with_golden_ratio
 from visualization import draw_result
 from sklearn.cluster import KMeans
 import time
@@ -23,12 +23,13 @@ def main(image_path):
     start_time = time.time()
     h, w, _ = original_image.shape
     initial_search_ranges = {'cx': [0, w], 'cy': [0, h], 'a': [10.0, 400.0], 'b': [0.1, 0.5]}
-    best_params, best_score = optimize_spiral(clustered_centroids, (h, w), initial_search_ranges)
+    # best_params, best_score = optimize_spiral(clustered_centroids, (h, w), initial_search_ranges)
+    best_params = optimize_spiral_with_golden_ratio(clustered_centroids, (h, w))
     print("\nフィッティング完了！")
     print(f"処理時間: {time.time() - start_time:.2f} 秒")
     draw_result(original_image, initial_centroids, clustered_centroids, best_params)
 
 if __name__ == '__main__':
     # ここで画像パスを指定
-    image_path = 'images\Illustration139.clipbu.pngbu.png'
+    image_path = 'images\Illustration137.cliptry.clipbu.clip.bu.png.bestcomposition.png'
     main(image_path)
