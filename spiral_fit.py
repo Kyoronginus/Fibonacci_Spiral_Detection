@@ -8,7 +8,7 @@ MIN_A_THRESHOLD = 15.0
 # 黄金螺旋の理論的なbの値
 GOLDEN_B = 0.30635 
 # 黄金比らしさをどれだけ重視するかの重み係数。大きくするほど黄金比の形を優先する。
-B_PENALTY_WEIGHT = 10000.0 
+B_PENALTY_WEIGHT = 9000 
 def calculate_composition_score(candidate_params, points, image_shape):
     h, w = image_shape
     cx, cy, a, b = candidate_params['cx'], candidate_params['cy'], candidate_params['a'], candidate_params['b']
@@ -79,7 +79,7 @@ def optimize_spiral_with_golden_ratio(points, image_shape):
     黄金比を優先する最適化関数
     """
     h, w = image_shape
-    search_ranges = {'cx': [0, w], 'cy': [0, h], 'a': [10.0, 400.0], 'b': [0.1, 0.5]}
+    search_ranges = {'cx': [-w, 2*w], 'cy': [-h, 2*h], 'a': [10.0, 400.0], 'b': [0.1, 0.5]}
     
     candidates = []
     for _ in range(NUM_CANDIDATES):

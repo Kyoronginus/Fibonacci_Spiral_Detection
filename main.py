@@ -31,5 +31,5 @@ def main(image_path):
 
 if __name__ == '__main__':
     # ここで画像パスを指定
-    image_path = 'images\Illustration137.cliptry.clipbu.clip.bu.png.bestcomposition.png'
+    image_path = 'images\Illustration11descaled.png'
     main(image_path)
