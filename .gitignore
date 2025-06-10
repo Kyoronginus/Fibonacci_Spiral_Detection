@@ -1,1 +1,4 @@
 /images
+/__pycache__/
+/python_server/__pycache__/
+/rust_axum_server/target/
