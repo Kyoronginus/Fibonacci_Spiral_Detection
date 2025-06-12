@@ -51,7 +51,7 @@ async fn upload_handler(
     tracing::debug!("Received file '{}' ({} bytes) with k='{}' and b_weight='{}'", file_name, file_data.len(), k_value, b_weight_value);
 
     let python_service_url = env::var("PYTHON_SERVICE_URL")
-        .map_err(|_| (StatusCode::INTERNAL_SERVER_ERROR, "PYTHON_SERVICE_URL env var not set".to_string()))?;
+        .unwrap_or_else(|_| "https://python-analysis-server-179718527697.asia-northeast1.run.app".to_string());
         
     let client = reqwest::Client::new();
     
@@ -66,7 +66,13 @@ async fn upload_handler(
         .part("b_weight", b_weight_part); // ★★★ b_weightパートをフォームに追加 ★★★
 
     tracing::debug!("Forwarding to Python service at {}", python_service_url);
-    let res = client.post(&python_service_url).multipart(form).send().await
+    let request = client.post(&python_service_url)
+        .multipart(form);
+
+    // If the Python service requires authentication, add the necessary headers
+    // For Google Cloud Run, you might need to add an Authorization header
+    // This depends on your specific setup
+    let res = request.send().await
         .map_err(|e| (StatusCode::INTERNAL_SERVER_ERROR, format!("Python service request failed: {}", e)))?;
     
     if res.status().is_success() {
@@ -83,3 +89,5 @@ async fn upload_handler(
         Err((StatusCode::BAD_GATEWAY, format!("Python service error: {}", error_text)))
     }
 }
+
+

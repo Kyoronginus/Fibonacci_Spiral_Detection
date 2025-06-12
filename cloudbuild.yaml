@@ -6,7 +6,7 @@ steps:
   # ★★★ ${_PROJECT_ID} を $PROJECT_ID に変更 ★★★
   - '${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO_NAME}/rust-entrypoint-server:latest'
   - '-f'
-  - 'rust_axum_server/Dockerfile'
+  - 'backend/rust_axum_server/Dockerfile'
   - '.'
 images:
 # ★★★ ${_PROJECT_ID} を $PROJECT_ID に変更 ★★★

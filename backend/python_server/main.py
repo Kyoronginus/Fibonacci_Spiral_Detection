@@ -20,7 +20,9 @@ origins = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "null", # ローカルのHTMLファイルを直接開いた場合のオリジン
-    "https://fibonacci-spiral-detecti-bf743.web.app"
+    "https://fibonacci-spiral-detecti-bf743.web.app",
+    # Add the Rust server URL
+    "https://rust-entrypoint-server-179718527697.asia-northeast1.run.app"
 ]
 app.add_middleware(
     CORSMiddleware,

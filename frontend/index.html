@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fibonacci Spiral Detection</title>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         /* (CSSは変更なしなので省略) */
         body {
@@ -144,6 +145,30 @@
                 padding: 1em 0.5em 2em 0.5em;
             }
         }
+
+        /* ★★★ アイコン用の新しいスタイルを追加 ★★★ */
+        .social-icons {
+            margin: 1em 0;
+            /* アイコンの上下に余白を追加 */
+        }
+
+        .social-icons a {
+            font-size: 1.8em;
+            /* アイコンのサイズを大きくする */
+            color: #bfa6c9;
+            /* アイコンの色を少し落ち着いた色に */
+            margin: 0 0.6em;
+            /* アイコン同士の間隔を空ける */
+            text-decoration: none;
+            /* リンクの下線を消す */
+            transition: color 0.2s;
+            /* 色が変わる際のアニメーション */
+        }
+
+        .social-icons a:hover {
+            color: #ffb6b9;
+            /* カーソルを合わせた時の色 */
+        }
     </style>
 </head>
 
@@ -177,6 +202,28 @@
                 Result will be shown here
             </div>
         </div>
+
+        <!-- ★★★ Author Section ★★★ -->
+<div style="margin-top:2em; color:#a7a7a7; font-size:0.65em;">
+    <hr style="margin:1.5em 0;">
+    <div>
+        <strong style="font-size:1.2em;">Author:</strong>
+        <span style="font-size:1.2em;"> Kyoronginus</span><br>
+        
+        <div class="social-icons">
+            <a href="https://github.com/Kyoronginus" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="https://x.com/kyoro_ina" target="_blank" title="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://www.pixiv.net/users/34124210" target="_blank" title="Pixiv"><i class="fa-brands fa-pixiv"></i></a>
+        </div>
+        
+        <span>
+            <!-- Personal Site: <a href="https://kyoronginus.carrd.co/" target="_blank" style="color:#a67ca7;">Commission Page</a><br><br> -->
+            Contact: <a href="mailto:kyoronginus@gmail.com" style="color:#a67ca7;">kyoronginus@gmail.com</a><br><br>
+            If you like this project, consider supporting me on
+            <a href="https://ko-fi.com/kyoronginus" target="_blank" style="color:#ff5e5b; font-weight:bold;">Ko-fi ☕</a>!
+        </span>
+    </div>
+</div>
     </div>
 
     <script>

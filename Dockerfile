@@ -12,7 +12,7 @@ WORKDIR /usr/src/app
 
 # ★★★ パスを修正 ★★★
 # プロジェクトルートからの相対パスで指定
-COPY ./rust_axum_server/Cargo.toml ./rust_axum_server/Cargo.lock ./
+COPY backend/rust_axum_server/Cargo.toml backend/rust_axum_server/Cargo.lock ./
 RUN mkdir src && echo "fn main() {}" > src/main.rs
 RUN cargo build --release --target x86_64-unknown-linux-musl
 

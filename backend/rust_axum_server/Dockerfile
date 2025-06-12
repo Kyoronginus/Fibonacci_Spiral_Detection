@@ -5,13 +5,13 @@ RUN rustup target add x86_64-unknown-linux-musl
 WORKDIR /usr/src/app
 
 # ★★★ プロジェクトルートからのパスに修正 ★★★
-COPY ./rust_axum_server/Cargo.toml ./rust_axum_server/Cargo.lock ./
+COPY backend/rust_axum_server/Cargo.toml backend/rust_axum_server/Cargo.lock ./
 RUN mkdir src && echo "fn main() {}" > src/main.rs
 RUN cargo build --release --target x86_64-unknown-linux-musl
 
 # ★★★ プロジェクトルートからのパスに修正 ★★★
-COPY ./rust_axum_server/.cargo ./.cargo
-COPY ./rust_axum_server/src ./src
+COPY backend/rust_axum_server/.cargo ./.cargo
+COPY backend/rust_axum_server/src ./src
 COPY ./frontend ./frontend
 RUN cargo build --release --target x86_64-unknown-linux-musl
 
