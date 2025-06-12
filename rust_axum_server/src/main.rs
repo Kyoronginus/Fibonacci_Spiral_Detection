@@ -17,7 +17,7 @@ use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
 #[derive(TryFromMultipart)]
 struct UploadRequest {
-    #[form_data(field_name = "file")]
+    #[form_data(field_name = "file", limit = "25MiB")]
     file: FieldData<Bytes>,
     k: String,
 }
@@ -36,7 +36,7 @@ async fn main() {
     let app = Router::new()
         .route("/upload", post(upload_handler))
         .layer(TraceLayer::new_for_http())
-        .layer(DefaultBodyLimit::max(10 * 1024 * 1024))
+        .layer(DefaultBodyLimit::max(25 * 1024 * 1024))
         .layer(cors);
 
     // ★★★ ポート番号を環境変数から取得するように修正 ★★★
