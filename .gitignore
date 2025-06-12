@@ -5,3 +5,6 @@
 
 /frontend/.firebase/
 frontend/hosting..cache
+
+/backend/python_server/__pycache__/
+/backend/rust_axum_server/target/
