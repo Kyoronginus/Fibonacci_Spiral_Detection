@@ -1,8 +1,12 @@
 # Fibonacci Spiral Detection
 
+This project has been deployed onto Google Cloud Platform, and can be accessed from the link below :
+https://fibonacci-spiral-detecti-bf743.web.app/
+
 A web application that analyzes images to detect and visualize Fibonacci spirals in compositions. The app identifies key points in an image, clusters them, and fits a logarithmic spiral that approximates the golden ratio.
 
-![Fibonacci Spiral Detection App](https://via.placeholder.com/800x400?text=Fibonacci+Spiral+Detection+Screenshot)
+![App Screenshot 1](assets\screenshot_page_1.png)
+![App Screenshot 2](assets\screenshot_page_2.png)
 
 ## Architecture
 
@@ -67,14 +71,9 @@ The application uses a three-tier architecture:
 
 ## Troubleshooting
 
-### Common Issues
+### Common Issue
 
-1. **502 Bad Gateway Error**:
-   - Check if both backend services are running
-   - Verify the Python service URL in the Rust server configuration
-   - Ensure the Python service allows unauthenticated access
-
-2. **Image Analysis Fails**:
+1. **Image Analysis Fails**:
    - Ensure the image has sufficient contrast for object detection
    - Try adjusting the k-value to control clustering
    - Images should be under 10MB for optimal performance
