@@ -5,8 +5,8 @@ https://fibonacci-spiral-detecti-bf743.web.app/
 
 A web application that analyzes images to detect and visualize Fibonacci spirals in compositions. The app identifies key points in an image, clusters them, and fits a logarithmic spiral that approximates the golden ratio.
 
-![App Screenshot 1](assets\screenshot_page_1.png)
-![App Screenshot 2](assets\screenshot_page_2.png)
+![App Screenshot 1](assets/screenshot_page_1.png)
+![App Screenshot 2](assets/screenshot_page_2.png)
 
 ## Architecture
 
