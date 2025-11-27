@@ -204,26 +204,31 @@
         </div>
 
         <!-- ★★★ Author Section ★★★ -->
-<div style="margin-top:2em; color:#a7a7a7; font-size:0.65em;">
-    <hr style="margin:1.5em 0;">
-    <div>
-        <strong style="font-size:1.2em;">Author:</strong>
-        <span style="font-size:1.2em;"> Kyoronginus</span><br>
-        
-        <div class="social-icons">
-            <a href="https://github.com/Kyoronginus" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
-            <a href="https://x.com/kyoro_ina" target="_blank" title="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
-            <a href="https://www.pixiv.net/users/34124210" target="_blank" title="Pixiv"><i class="fa-brands fa-pixiv"></i></a>
+        <div style="margin-top:2em; color:#a7a7a7; font-size:0.65em;">
+            <hr style="margin:1.5em 0;">
+            <div>
+                <strong style="font-size:1.2em;">Author:</strong>
+                <span style="font-size:1.2em;"> Kyoronginus</span><br>
+
+                <div class="social-icons">
+                    <a href="https://github.com/Kyoronginus" target="_blank" title="GitHub"><i
+                            class="fa-brands fa-github"></i></a>
+                    <a href="https://x.com/kyoro_ina" target="_blank" title="Twitter"><i
+                            class="fa-brands fa-x-twitter"></i></a>
+                    <a href="https://www.pixiv.net/users/34124210" target="_blank" title="Pixiv"><i
+                            class="fa-brands fa-pixiv"></i></a>
+                </div>
+
+                <span>
+                    <!-- Personal Site: <a href="https://kyoronginus.carrd.co/" target="_blank" style="color:#a67ca7;">Commission Page</a><br><br> -->
+                    Contact: <a href="mailto:kyoronginus@gmail.com"
+                        style="color:#a67ca7;">kyoronginus@gmail.com</a><br><br>
+                    If you like this project, consider supporting me on
+                    <a href="https://ko-fi.com/kyoronginus" target="_blank"
+                        style="color:#ff5e5b; font-weight:bold;">Ko-fi ☕</a>!
+                </span>
+            </div>
         </div>
-        
-        <span>
-            <!-- Personal Site: <a href="https://kyoronginus.carrd.co/" target="_blank" style="color:#a67ca7;">Commission Page</a><br><br> -->
-            Contact: <a href="mailto:kyoronginus@gmail.com" style="color:#a67ca7;">kyoronginus@gmail.com</a><br><br>
-            If you like this project, consider supporting me on
-            <a href="https://ko-fi.com/kyoronginus" target="_blank" style="color:#ff5e5b; font-weight:bold;">Ko-fi ☕</a>!
-        </span>
-    </div>
-</div>
     </div>
 
     <script>
@@ -263,7 +268,7 @@
 
             try {
                 // Pythonサーバーのプレビューエンドポイントを直接呼び出す
-                const response = await fetch('https://python-analysis-server-179718527697.asia-northeast1.run.app/preview_clusters/', {
+                const response = await fetch('http://localhost:3000/preview_clusters/', {
                     method: 'POST',
                     body: formData,
                 });
@@ -330,7 +335,7 @@
             resultBox.innerHTML = '';
 
             try {
-                const response = await fetch('https://rust-entrypoint-server-179718527697.asia-northeast1.run.app/upload', {
+                const response = await fetch('http://localhost:3000/analyze/', {
                     method: 'POST',
                     body: formData,
                 });
