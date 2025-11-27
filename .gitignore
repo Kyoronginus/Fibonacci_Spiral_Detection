@@ -8,3 +8,42 @@ frontend/hosting..cache
 
 /backend/python_server/__pycache__/
 /backend/rust_axum_server/target/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Node.js / Frontend
+node_modules/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.env
+.env.local
+.env.*.local
+
+# Rust
+/backend/rust_axum_server/target/
+Cargo.lock
+
+# Firebase
+.firebase/
+frontend/.firebase/
+frontend/hosting..cache
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project specific
+response.json
+local_run/
+images/

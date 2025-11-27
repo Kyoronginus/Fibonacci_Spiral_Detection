@@ -8,7 +8,6 @@ use base64::{Engine as _, engine::general_purpose};
 struct AnalyzeResponse {
     score: f64,
     b_value: f64,
-    golden_b: f64,
     image_base64: String,
 }
 

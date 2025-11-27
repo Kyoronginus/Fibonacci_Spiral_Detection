@@ -2,9 +2,10 @@ use rand::Rng;
 use rand::seq::SliceRandom;
 use std::f64::consts::PI;
 use std::cmp::Ordering;
+use rayon::prelude::*;
 
 const NUM_GENERATIONS: usize = 80;
-const NUM_CANDIDATES: usize = 250;
+const NUM_CANDIDATES: usize = 300;
 const N_ELITES: usize = 15;
 const MUTATION_RATE: f64 = 0.25;
 const MIN_A_THRESHOLD: f64 = 15.0;
@@ -73,20 +74,17 @@ pub fn optimize_spiral_with_golden_ratio(points: &[[f64; 2]], image_shape: (u32,
     let mut best_overall_score = f64::INFINITY;
 
     for _generation in 0..NUM_GENERATIONS {
-        let mut scored_candidates: Vec<(f64, SpiralParams)> = Vec::with_capacity(NUM_CANDIDATES);
-
-        for params in &candidates {
+        let mut scored_candidates: Vec<(f64, SpiralParams)> = candidates.par_iter().map(|params| {
             if params.a < MIN_A_THRESHOLD {
-                scored_candidates.push((f64::INFINITY, params.clone()));
-                continue;
+                return (f64::INFINITY, params.clone());
             }
 
             let distance_score = calculate_composition_score(params, points, image_shape);
             let b_penalty = (params.b - GOLDEN_B).powi(2);
             let final_score = distance_score + b_penalty_weight * b_penalty;
             
-            scored_candidates.push((final_score, params.clone()));
-        }
+            (final_score, params.clone())
+        }).collect();
 
         scored_candidates.sort_by(|a, b| a.0.partial_cmp(&b.0).unwrap_or(Ordering::Equal));
 
@@ -112,13 +110,11 @@ pub fn optimize_spiral_with_golden_ratio(points: &[[f64; 2]], image_shape: (u32,
         for i in 0..num_offspring {
             let parent = &elites[i % elites.len()];
             next_generation.push(SpiralParams {
-                cx: rng.gen::<f64>() * w * 0.1 + parent.cx, // Approximate normal distribution with uniform for simplicity or use StandardNormal
+                cx: rng.gen::<f64>() * w * 0.1 + parent.cx,
                 cy: rng.gen::<f64>() * h * 0.1 + parent.cy,
                 a: rng.gen::<f64>() * 20.0 + parent.a,
                 b: rng.gen::<f64>() * 0.05 + parent.b,
             });
-            // Note: For better normal distribution we should use rand_distr but simple variation is okay for now.
-            // Let's refine to use simple random variation around parent.
         }
         candidates = next_generation;
     }

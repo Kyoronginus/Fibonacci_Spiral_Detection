@@ -5,6 +5,7 @@ use linfa::DatasetBase;
 use linfa_clustering::KMeans;
 use rand::thread_rng;
 use anyhow::Result;
+use rayon::prelude::*;
 
 pub fn extract_object_centroids(image: &DynamicImage) -> Result<(Vec<[f64; 2]>, Vec<Vec<imageproc::point::Point<i32>>>)> {
     let gray = image.to_luma8();
@@ -117,10 +118,9 @@ pub fn find_optimal_k(points: &[[f64; 2]], max_k: usize) -> usize {
         return max_k;
     }
 
-    let mut inertias = Vec::new();
     let k_range: Vec<usize> = (2..=max_k).collect();
 
-    for &k in &k_range {
+    let inertias: Vec<f64> = k_range.par_iter().map(|&k| {
         let dataset = DatasetBase::new(ndarray::Array2::from(points.to_vec()), ());
         let rng = thread_rng();
         let model = KMeans::params_with_rng(k, rng)
@@ -129,14 +129,10 @@ pub fn find_optimal_k(points: &[[f64; 2]], max_k: usize) -> usize {
             .fit(&dataset);
 
         match model {
-            Ok(model) => {
-                inertias.push(model.inertia());
-            }
-            Err(_) => {
-                inertias.push(f64::MAX);
-            }
+            Ok(model) => model.inertia(),
+            Err(_) => f64::MAX,
         }
-    }
+    }).collect();
 
     if inertias.is_empty() {
         return 1;
@@ -180,4 +176,22 @@ pub fn find_optimal_k(points: &[[f64; 2]], max_k: usize) -> usize {
     }
     
     optimal_k
+}
+
+pub fn perform_clustering(points: &[[f64; 2]], k: usize) -> Result<Vec<[f64; 2]>> {
+    let records = ndarray::Array2::from_shape_vec((points.len(), 2), points.iter().flat_map(|p| p.to_vec()).collect())?;
+    let dataset = DatasetBase::new(records, ());
+    
+    let model = KMeans::params(k)
+        .max_n_iterations(100)
+        .tolerance(1e-5)
+        .fit(&dataset)
+        .map_err(|e| anyhow::anyhow!("KMeans failed: {}", e))?;
+    
+    let centroids_array = model.centroids();
+    let mut centroids = Vec::new();
+    for row in centroids_array.outer_iter() {
+        centroids.push([row[0], row[1]]);
+    }
+    Ok(centroids)
 }

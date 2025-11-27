@@ -6,7 +6,6 @@ from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 
 def extract_object_centroids(image):
-    """画像からオブジェクトの輪郭を検出し、その重心のリストを返す"""
     h, w, _ = image.shape
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     blurred = cv2.GaussianBlur(gray, (5, 5), 0)
@@ -28,10 +27,9 @@ def extract_object_centroids(image):
     return np.array(centroids), object_contours
 
 def find_optimal_k(points, max_k=10):
-    """エルボー法で最適なクラスタ数kを見つける"""
     if len(points) <= max_k:
         max_k = len(points) - 1
-    if max_k < 2: return max_k # クラスタリングが不可能な場合は、点の数をそのまま返す
+    if max_k < 2: return max_k
 
     inertias = []
     k_range = range(2, max_k + 1)
@@ -50,8 +48,6 @@ def find_optimal_k(points, max_k=10):
         
     optimal_k = k_range[np.argmax(distances)]
     
-    # デバッグ用にエルボーグラフを表示したい場合は以下のコメントを外す
-    # ただし、サーバー環境ではGUIが表示できないためエラーになる
     # plt.figure(figsize=(7, 5))
     # plt.plot(k_range, inertias, 'bo-')
     # plt.title('Elbow Method')
