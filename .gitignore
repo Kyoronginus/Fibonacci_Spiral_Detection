@@ -9,6 +9,8 @@ frontend/hosting..cache
 /backend/python_server/__pycache__/
 /backend/rust_axum_server/target/
 
+node_modules/
+
 # Python
 __pycache__/
 *.py[cod]
