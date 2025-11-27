@@ -13,10 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: npm ci
+      - run: npm ci && npm run build
+        working-directory: frontend
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{
             secrets.FIREBASE_SERVICE_ACCOUNT_FIBONACCI_SPIRAL_DETECTI_BF743 }}
           projectId: fibonacci-spiral-detecti-bf743
+          entryPoint: frontend

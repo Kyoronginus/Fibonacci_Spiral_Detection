@@ -23,6 +23,10 @@ The application uses a three-tier architecture:
 └─────────────┘     └─────────────────┘     └─────────────────┘
 ```
 
+UPDATE on 2025-11-27 :
+
+- All backend logics has been replaced by Rust, there is no python service anymore.
+
 ## Key Features
 
 - Upload and analyze images to detect Fibonacci spiral patterns
@@ -35,24 +39,28 @@ The application uses a three-tier architecture:
 ## Technologies Used
 
 ### Frontend
+
 - HTML5, CSS3, JavaScript
 - Firebase Hosting
 
 ### Backend
+
 - **Rust Server**:
+
   - Axum web framework
   - Tokio async runtime
   - Reqwest for HTTP client
   - Tower-HTTP for middleware
 
-- **Python Service**:
-  - FastAPI
-  - OpenCV for image processing
-  - scikit-learn for clustering
-  - NumPy for numerical operations
-  - Matplotlib for visualization
+- **Python Service** (now replaced by Rust):
+  - FastAPI (now replaced by Rust)
+  - OpenCV for image processing (now replaced by Rust)
+  - scikit-learn for clustering (now replaced by Rust)
+  - NumPy for numerical operations (now replaced by Rust)
+  - Matplotlib for visualization (now replaced by Rust)
 
 ### Deployment
+
 - Google Cloud Run for containerized services
 - Docker for containerization
 - GitHub Actions for CI/CD

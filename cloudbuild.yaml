@@ -1,13 +1,28 @@
 steps:
-- name: 'gcr.io/cloud-builders/docker'
-  args:
-  - 'build'
-  - '-t'
-  # ★★★ ${_PROJECT_ID} を $PROJECT_ID に変更 ★★★
-  - '${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO_NAME}/rust-entrypoint-server:latest'
-  - '-f'
-  - 'backend/rust_axum_server/Dockerfile'
-  - '.'
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      - "build"
+      - "-t"
+      - "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO_NAME}/rust-entrypoint-server:latest"
+      - "-f"
+      - "backend/rust_axum_server/Dockerfile"
+      - "."
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      - "push"
+      - "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO_NAME}/rust-entrypoint-server:latest"
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: gcloud
+    args:
+      - "run"
+      - "deploy"
+      - "rust-backend"
+      - "--image"
+      - "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO_NAME}/rust-entrypoint-server:latest"
+      - "--region"
+      - "${_REGION}"
+      - "--platform"
+      - "managed"
+      - "--allow-unauthenticated"
 images:
-# ★★★ ${_PROJECT_ID} を $PROJECT_ID に変更 ★★★
-- '${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO_NAME}/rust-entrypoint-server:latest'
+  - "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO_NAME}/rust-entrypoint-server:latest"

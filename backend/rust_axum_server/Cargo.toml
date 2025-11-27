@@ -4,11 +4,23 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-axum = "0.7"
-tokio = { version = "1", features = ["full"] }
-tower-http = { version = "0.5", features = ["trace", "cors"] }
+axum = { version = "0.7.5", features = ["multipart"] }
+tokio = { version = "1.0", features = ["full"] }
+tower-http = { version = "0.5.2", features = ["cors", "trace", "limit"] }
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
-reqwest = { version = "0.12", features = ["multipart", "rustls-tls"], default-features = false }
-axum_typed_multipart = "0.11"
-bytes = "1"
+axum_typed_multipart = "0.11.0"
+bytes = "1.6.0"
+reqwest = { version = "0.12.4", features = ["multipart", "json", "rustls-tls"], default-features = false }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+image = "0.24"
+imageproc = "0.23"
+linfa = "0.7"
+linfa-clustering = "0.7"
+linfa-nn = "0.7"
+ndarray = "0.15"
+rand = "0.8"
+base64 = "0.22"
+anyhow = "1.0"
+rayon = "1.10"
